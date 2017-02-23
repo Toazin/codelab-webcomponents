@@ -1,0 +1,7 @@
+
+1. Instalar Bower
+$ npm install -g bower
+
+2. Instalar Web Components
+$ bower install google-map
+$ bower install paper-slider
