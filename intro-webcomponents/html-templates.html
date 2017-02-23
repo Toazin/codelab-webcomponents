@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Components - HTML Templates</title>
+    </head>
+    <body>
+        <div id="greeting"></div>
+
+        <template id="gdg-guadalajara">
+            <h1>¡Hola!</h1>
+            <img id="logo" src="assets/GDG_Guadalajara.png">
+
+            <script>
+                alert("¡Hola GDG Guadalajara!");
+            </script>
+        </template>
+
+        <script>
+            // El siguiente script es incapaz de encontrar el elemento con el id "logo".
+            // Ésto demuestra que el contenido del template por naturaleza es inerte.
+            (function() {
+                var imageElm = document.getElementById("logo"),
+                    greeting = document.getElementById("greeting");
+
+                greeting.innerHTML = imageElm;
+            })();
+
+            // Para activar un template, clonamos un nodo:
+            var gdgTemplate = document.querySelector("#gdg-guadalajara"),
+                container = document.getElementById("greeting"),
+                templateContent = gdgTemplate.content,
+                activeContent = templateContent.cloneNode(true);
+
+            container.appendChild(activeContent);
+
+            // o, importamos un nodo:
+            // activeContent = document.importNode(templateContent, true);
+        </script>
+    </body>
+</html>

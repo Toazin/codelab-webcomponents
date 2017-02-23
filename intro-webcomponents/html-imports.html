@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Components - HTML Imports</title>
+        <link rel="import" href="greetings.html">
+    </head>
+    <body>
+        <script>
+            // HTML Imports nos permiten incluir otro ducumento HTML presente en
+            // un archivo separado en el documento actual.
+            (function() {
+                var externalDocument = document.querySelector('link[rel="import"]').import,
+                template = externalDocument.querySelector('#gdg-guadalajara'),
+                clone = document.importNode(template.content, true);
+
+                document.body.appendChild(clone);
+            })();
+        </script>
+    </body>
+</html>
