@@ -5,3 +5,10 @@ $ npm install -g bower
 2. Instalar Web Components
 $ bower install google-map
 $ bower install paper-slider
+
+TODO App
+$ bower install paper-input
+$ bower install paper-button
+$ bower install paper-checkbox
+$ bower install paper-icon-button
+$ bower install iron-icons

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Polymer - Todo Application</title>
+        <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+        <link rel="import" href="bower_components/paper-input/paper-input.html">
+        <link rel="import" href="bower_components/paper-button/paper-button.html">
+        <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+        <link rel="import" href="bower_components/paper-checkbox/paper-checkbox.html">
+        <style>
+            body {
+                font-family: Roboto, sans-serif;
+                color: #333;
+                max-width: 700px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            form {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-bottom:20px;
+            }
+
+            paper-button {
+                flex-shrink: 1;
+            }
+
+            paper-input {
+                flex-grow: 1;
+            }
+
+            paper-checkbox {
+                display: inline-block;
+                margin: 5px 0;
+                transition: opacity 0.3s;
+            }
+
+            paper-checkbox[checked] {
+                opacity: 0.5;
+            }
+        </style>
+    </head>
+    <body>
+        <template is="dom-bind" id="app">
+            <h1>Todo App</h1>
+            <form>
+                <paper-input
+                    value="{{newTodoValue}}"
+                    placeholder="Ingresa tarea">
+                </paper-input>
+                <paper-button on-click="addItem">To Do</paper-button>
+            </form>
+
+            <template is="dom-repeat" items="{{items}}">
+                <div>
+                    <paper-icon-button
+                        icon="delete"
+                        on-click="deleteItem"></paper-icon-button>
+                    <paper-checkbox
+                        checked="{{item.done}}"
+                        on-change="toggleItem">{{item.text}}</paper-checkbox>
+                </div>
+            </template>
+        </template>
+
+        <script>
+            (function(document) {
+                'use strict';
+
+                var app = document.querySelector('#app');
+
+                app.items = [
+                    {
+                        done: true,
+                        text: "Hacer uso de los componentes"
+                    },
+                    {
+                        done: false,
+                        text: "Escribir TODO app"
+                    }
+                ];
+
+                app.addItem = function(event) {
+                    event.preventDefault();
+
+                    this.push('items', {
+                        done: false,
+                        text: app.newTodoValue
+                    });
+
+                    this.newTodoValue = "";
+                };
+
+                app.deleteItem = function(event) {
+                    this.splice('items', event.model.index, 1);
+                };
+
+                app.toggleItem = function(event) {
+                    event.model.set('done', !event.model.item.done);
+                };
+            })(document);
+        </script>
+    </body>
+</html>
